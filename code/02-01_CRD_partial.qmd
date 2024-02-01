@@ -26,12 +26,8 @@ library(multcomp) # for pairwise comparison letter display
 ```
 
 ```{r data import}
-crd_df <- read.csv("../data/wheat_nk_balkh.csv")
+crd_df <- 
 
-crd_df %>% 
-  ggplot(aes()+
-  geom_point(x=as.factor(krate_kgha), y=yield_kgha), color = "blue")+
-  geom_point(x=as.factor(nrate_kgha), y=yield_kgha), color = "red"))
 ```
 
 # b) EDA tables  
