@@ -315,8 +315,10 @@ crd_cld_all
 crd_cld_nk <- cld(crd_means_nk, 
                    reversed=T, 
                    adjust="none",
-               Letters=letters)#%>% 
-  #mutate(letters = trimws(.group))
+               Letters=letters)%>% 
+  as.data.frame() %>% 
+  mutate(letters = trimws(.group))%>% 
+  mutate(trtname = paste0(nrate_kgha,"+",krate_kgha))
 
 crd_cld_nk
 ```
@@ -360,7 +362,19 @@ ggplot()+
   scale_y_continuous(limits = c(0,8000))
 ```
 
-
+```{r crd final plot from n rate differences}
+ggplot()+
+  # Raw data and boxplots  
+  geom_boxplot(data = crd_dfw, 
+               aes(x = nrate_kgha, y = yield_kgha, fill=nrate_kgha))+
+  # Adding letters
+  geom_label(data = crd_cld_nk, 
+             aes(x= nrate_kgha,
+                 y = emmean,
+                 label=letters))+
+  scale_y_continuous(limits = c(0,8000))+
+  facet_wrap(.~krate_kgha)
+```
 
 Let's make this plot publication ready.  
 
